@@ -30,11 +30,9 @@ void capitalizer(char *str)
     int i = 0;
     while (str[i])
     {
-        if (is_upper(str[i]) && !is_space(str[i + 1]))
+        if (is_upper(str[i]))
             str[i] += 32;
-        else if (is_lower(str[i]) && is_space(str[i + 1]))
-            str[i] -= 32;
-        else if (is_lower(str[i]) && str[i + 1] == '\0')
+        if (is_lower(str[i]) && (is_space(str[i + 1]) || str[i + 1] == '\0'))
             str[i] -= 32;
         write(1, &str[i], 1);
         i++;
@@ -44,15 +42,15 @@ void capitalizer(char *str)
 int main (int ac, char **av)
 {
     int i = 1;
-    if (ac == 1)
-        write(1, "\n", 1);
-    else
-    {
-        while (i < ac)
-        {
-            capitalizer(av[i]);
-            write(1, "\n", 1);
-            i++;
-        }
-    }
+    if (ac > 1)
+	{
+		while (av[i])
+		{
+			capitalizer(av[i]);
+			write(1, "\n", 1);
+			i++;
+		}
+	}
+	else
+		write(1, "\n", 1);
 }
