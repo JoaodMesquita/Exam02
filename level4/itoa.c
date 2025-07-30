@@ -1,10 +1,10 @@
 #include <stdlib.h>
-int	pico(int nbr)
+int	ft_count_len(int nbr)
 {	
 	int i = 0;
 	if(nbr <= 0)
 		i++;
-	while(nbr > 0)
+	while(nbr != 0)
 	{
 		nbr = nbr / 10;
 		i++;
@@ -13,32 +13,32 @@ int	pico(int nbr)
 }
 char	*ft_itoa(int nbr)
 {
-		char	*goncalo;
-		int		picole;
+		char	*str;
+		int		len;
+		int	i;
 
-		picole = pico(nbr);
-		goncalo = malloc((picole + 1) * sizeof(char *));
-		if(!goncalo)
+		len = ft_count_len(nbr);
+		str = malloc((len + 1) * sizeof(char));
+		if(!str)
 			return (NULL);
-		goncalo[picole] = '\0';
+		str[len] = '\0';
+		i = len - 1;
 		if(nbr < 0)
 		{
-			goncalo[0] = '-';
-			
+			str[0] = '-';
+			nbr = -nbr;
 		}
 		while (nbr >= 10)
 		{
-			goncalo[picole] = nbr % 10 + '0';
+			str[i] = nbr % 10 + '0';
 			nbr = nbr / 10;
-			picole--;
+			i--;
 		}
-		goncalo[picole] = nbr + '0';
-		return (goncalo);
+		str[i] = nbr + '0';
+		return (str);
 }
 #include <stdio.h>
 int main ()
 {
-	char *
-	ft_itoa(123);
-
+	printf ("%s" , ft_itoa(-112121221));
 }
